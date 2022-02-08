@@ -1,28 +1,23 @@
 <template>
-    <div>
-      <like-header></like-header>
-      <h2>{{ number }}</h2>
-      <like-number :total-number="number" v-on:my-click="incrementNumber"></like-number>
-      <!-- 左側が子コンポーネントファイルで設定したpropsの受け口、右側が親コンポーネントで設定したdata。 -->
-      <like-number :total-number="number" :test-number="testNumber"></like-number>
-    </div>
+  <div class="main">
+    <button @click="show = !show">
+        切り替え
+    </button>
+    <transition name="fade">
+    <p v-if="show">hello</p>
+    </transition>
+
+  </div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
-import LikeNumber from './components/LikeNumber.vue'
-import LikeHeader from './components/LikeHeader.vue'
 
 export default {
   data() {
     return {
-        number:14,
-        // testNumber:24
+        show:true,
     };
-  },
-  components: {
-    LikeNumber,
-    LikeHeader
   },
   methods:{
     incrementNumber(value) {
@@ -32,13 +27,31 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+<style scoped>
+.main {
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  padding-top: 5rem;
+  width: 70%;
+  margin:auto;
 }
+
+.fade-enter{
+  opacity: 0;
+}
+.fade-enter-active{
+  transition: opacity 2s;
+}
+.fade-enter-to{
+  opacity: 1;
+}
+.fade-leave{
+  opacity: 1;
+}
+.fade-leave-active{
+  transition: opacity 2s;
+}
+.fade-leave-to{
+  opacity: 0;
+}
+
 </style>
